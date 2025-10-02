@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ESP32-WROOM-32-N4")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/ESP32-WROOM-32-N4/KiCADv6/2025-10-02_02-29-59.kicad_sym")(options "")(descr ""))
+  (lib (name "MBRS130LT3G")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/MBRS130LT3G/KiCADv6/2025-10-02_02-44-50.kicad_sym")(options "")(descr ""))
+  (lib (name "CAT24C512")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/CAT24C512XI-T2/KiCADv6/2025-10-02_02-52-42.kicad_sym")(options "")(descr ""))
+)
