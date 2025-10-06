@@ -1,4 +1,11 @@
-25683412108582784
+25699246601660337
+AT-1127-ST-2-R
+XDCR_AT-1127-ST-2-R
+
+
+0
+2
+2
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -13,6 +20,13 @@ audio belton reverb
 0
 7
 7
+B2B-PH-K-S
+JST_B2B-PH-K-S
+
+
+0
+2
+2
 Battery
 BatteryClip_Keystone_54_D16-19mm
 Battery clip for batteries with a diameter between 16-19 mm: https://www.keyelco.com/product.cfm/product_id/826
@@ -2568,6 +2582,27 @@ speaker CUI
 0
 2
 2
+CAT24C512
+SOIC8_ONS
+
+CAT24C512XI-T2 
+0
+8
+8
+CAT24C512
+SOIC8_ONS-L
+
+CAT24C512XI-T2 
+0
+8
+8
+CAT24C512
+SOIC8_ONS-M
+
+CAT24C512XI-T2 
+0
+8
+8
 Calibration_Scale
 Gauge_10mm_Type1_CopperTop
 Gauge, Massstab, 10mm, CopperTop, Type 1,
@@ -57217,6 +57252,13 @@ One digit LED 7 segment SA39-11 SC39-11 SA39-12 SC39-12
 0
 10
 10
+ESP32-WROOM-32-N4
+MOD_ESP32-WROOM-32_EXP
+
+ESP32-WROOM-32-N4 
+0
+47
+47
 Ferrite_THT
 LairdTech_28C0236-0JW-10
 Ferrite, vertical, LairdTech 28C0236-0JW-10, https://assets.lairdtech.com/home/brandworld/files/28C0236-0JW-10.pdf, JW Miller core https://www.bourns.com/products/magnetic-products/j.w.-miller-through-hole-ferrite-beads-emi-filters
@@ -65834,6 +65876,27 @@ LoRa1276-C1-915
 0
 16
 16
+MBRS130L3TG
+DIODE_SMB_2L_ONS
+
+MBRS130LT3G 
+0
+2
+2
+MBRS130L3TG
+DIODE_SMB_2L_ONS-L
+
+MBRS130LT3G 
+0
+2
+2
+MBRS130L3TG
+DIODE_SMB_2L_ONS-M
+
+MBRS130LT3G 
+0
+2
+2
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet

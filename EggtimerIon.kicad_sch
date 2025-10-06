@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "Eggtimer Ion Flight Computer ")
-		(date "2025-10-02")
+		(date "2025-10-06")
 		(rev "v1.0")
 		(company "Metropolitan Aerospace Rocket Society")
 		(comment 1 "Author: Fawaaz Kamali Siddiqui")
@@ -8020,6 +8020,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15639"
+			(at 142.24 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "38765b86-3264-4b33-a826-5a016a566583")
 		)
@@ -8168,6 +8177,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 76.2 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C82899"
 			(at 76.2 121.92 0)
 			(effects
 				(font
