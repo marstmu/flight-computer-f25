@@ -6222,7 +6222,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:R_1206"
 			(at 230.632 90.17 90)
 			(effects
 				(font
@@ -6369,7 +6369,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:R_1206"
 			(at 40.132 147.32 90)
 			(effects
 				(font
@@ -6966,7 +6966,7 @@
 				)
 			)
 		)
-		(property "Footprint" "DIODE_SMB_2L_ONS"
+		(property "Footprint" "MBRS130L3TG:DIODE_SMB_2L_ONS"
 			(at 191.77 26.67 0)
 			(effects
 				(font
@@ -7047,7 +7047,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:R_1206"
 			(at 144.272 121.92 90)
 			(effects
 				(font
@@ -7181,7 +7181,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 33.02 153.9748 0)
 			(effects
 				(font
@@ -7648,7 +7648,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 144.78 172.72 0)
 			(effects
 				(font
@@ -7718,7 +7718,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
 			(at 152.4 144.78 0)
 			(effects
 				(font
@@ -8079,7 +8079,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 95.25 66.3448 0)
 			(effects
 				(font
@@ -8147,7 +8147,7 @@
 				)
 			)
 		)
-		(property "Footprint" "MOD_ESP32-WROOM-32_EXP"
+		(property "Footprint" "ESP32-WROOM-32-N4:MOD_ESP32-WROOM-32_EXP"
 			(at 76.2 121.92 0)
 			(effects
 				(font
@@ -8552,7 +8552,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:R_1206"
 			(at 153.162 121.92 90)
 			(effects
 				(font
@@ -8686,7 +8686,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 72.39 32.7152 0)
 			(effects
 				(font
@@ -8753,7 +8753,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 54.61 120.9548 0)
 			(effects
 				(font
@@ -8823,7 +8823,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 186.3852 35.56 0)
 			(effects
 				(font
@@ -9155,7 +9155,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 152.4 38.4048 0)
 			(effects
 				(font
@@ -9497,7 +9497,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 234.6452 35.56 0)
 			(effects
 				(font
@@ -9824,7 +9824,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 55.88 30.7848 0)
 			(effects
 				(font
@@ -9960,7 +9960,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 86.0552 81.28 0)
 			(effects
 				(font
@@ -10028,7 +10028,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 255.27 132.3848 0)
 			(effects
 				(font
@@ -10096,7 +10096,7 @@
 				)
 			)
 		)
-		(property "Footprint" "SOIC8_ONS"
+		(property "Footprint" "CAT24C512:SOIC8_ONS"
 			(at 200.66 139.7 0)
 			(effects
 				(font
@@ -10325,7 +10325,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "PCM_JLCPCB:C_1206"
 			(at 54.61 114.6048 0)
 			(effects
 				(font
