@@ -6608,7 +6608,7 @@
 		(uuid "86155c0d-cf56-4db1-b36e-4665d6c9043a")
 	)
 	(no_connect
-		(at 63.5 154.94)
+		(at 135.89 165.1)
 		(uuid "890099b1-89c1-43fd-98e6-bf06b4f94a51")
 	)
 	(no_connect
@@ -9003,6 +9003,16 @@
 		)
 		(uuid "29b99305-00c4-4883-8ba9-ebe3ce42d656")
 	)
+	(label "USB_D+"
+		(at 46.99 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3567c535-0990-482f-971b-97b5fe557889")
+	)
 	(label "SD2"
 		(at 63.5 162.56 0)
 		(effects
@@ -9052,6 +9062,16 @@
 			(justify left bottom)
 		)
 		(uuid "438e88e1-be80-46b3-96e8-a9793c8e7e51")
+	)
+	(label "USB_D-"
+		(at 46.99 55.88 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "457a7583-0f5d-4209-ac1e-614c0904dc47")
 	)
 	(label "SDA"
 		(at 201.93 125.73 0)
@@ -9293,7 +9313,7 @@
 		)
 		(uuid "bc14c6d7-b9dc-4895-8561-ceab6e15bce0")
 	)
-	(label "IO18"
+	(label "IO12"
 		(at 195.58 66.04 180)
 		(effects
 			(font
@@ -12346,7 +12366,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ESP32-WROOM-32-N4:MOD_ESP32-WROOM-32_EXP"
+		(property "Footprint" "RF_Module:ESP32-WROOM-32"
 			(at 76.2 121.92 0)
 			(effects
 				(font
