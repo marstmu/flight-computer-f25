@@ -9,7 +9,7 @@
 	(paper "A4")
 	(title_block
 		(title "Eggtimer Ion Clone")
-		(date "2025-10-06")
+		(date "2025-10-13")
 		(rev "v1.0")
 		(company "Metropolitan Aerospace Rocket Society")
 		(comment 1 "Author: Fawaaz Kamali Siddiqui")
@@ -1997,7 +1997,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R9"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e61edaee-73f1-4116-bbb3-84bdb7aa05be")
@@ -2009,7 +2009,7 @@
 			)
 		)
 		(property "Value" "5k1"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "968448c6-3b8b-4a04-859d-aba3447b5a63")
 			(effects
@@ -2145,7 +2145,7 @@
 			(uuid "c8ade62b-fb26-4b95-a3d3-121e7fc3bfda")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "109234b6-496d-4012-aabf-2d47e29d7cad")
 			(effects
@@ -2380,7 +2380,7 @@
 			(uuid "d12614d0-7217-45f9-a8d5-6d2a8a16a912")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "65f73dd1-af8e-44a4-80b0-e36cb6d326cc")
 			(effects
@@ -2801,7 +2801,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R11"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "a14cf1ff-f34b-44db-a2c4-f135d6346898")
@@ -2813,7 +2813,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "ee89df4c-8e19-40f3-96fa-daede184bc9e")
 			(effects
@@ -2949,7 +2949,7 @@
 			(uuid "8b38c194-eef9-4b3c-a14f-dc84dd00c818")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "dd6ae654-ed20-4872-8934-0cf9ea19bf87")
 			(effects
@@ -3778,7 +3778,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R8"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "b7f11cc0-6f3c-44fe-84ee-eaf4f0c6cc74")
@@ -3790,7 +3790,7 @@
 			)
 		)
 		(property "Value" "5k1"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "ac7af54d-49ad-478a-a637-b87320037883")
 			(effects
@@ -3926,7 +3926,7 @@
 			(uuid "5b405dad-ab3f-497c-a1c4-52b1ade1cc0c")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "b639bb45-51c4-469c-bcaa-8619bf76c65f")
 			(effects
@@ -4558,7 +4558,7 @@
 		(descr "QFN, 28 Pin (http://ww1.microchip.com/downloads/en/PackagingSpec/00000049BQ.pdf#page=283), generated with kicad-footprint-generator ipc_noLead_generator.py")
 		(tags "QFN NoLead")
 		(property "Reference" "U6"
-			(at 0 -3.8 360)
+			(at 0 -3.8 0)
 			(layer "F.SilkS")
 			(uuid "ab16b541-f46a-4a1d-b3ab-5e1e4822bf71")
 			(effects
@@ -4569,7 +4569,7 @@
 			)
 		)
 		(property "Value" "CP2102N-Axx-xQFN28"
-			(at 0 3.8 360)
+			(at 0 3.8 0)
 			(layer "F.Fab")
 			(uuid "44a30e12-8114-4033-a586-29e86f6d5294")
 			(effects
@@ -4580,7 +4580,7 @@
 			)
 		)
 		(property "Footprint" "Package_DFN_QFN:QFN-28-1EP_5x5mm_P0.5mm_EP3.35x3.35mm"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9a265b31-be19-4a79-ba40-e21424984f15")
@@ -4592,7 +4592,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/cp2102n-datasheet.pdf"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9a3174c4-9961-41c7-aba5-f17e3a6158ed")
@@ -4604,7 +4604,7 @@
 			)
 		)
 		(property "Description" "USB to UART master bridge, QFN-28"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "237bcec0-1183-496a-8a88-390e321714e7")
@@ -4816,7 +4816,7 @@
 			(uuid "fb7541cb-20bd-4b02-856b-ce131f894620")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "f605cc26-73f8-4a98-a3d1-7fbb5a7f2b4c")
 			(effects
@@ -6762,7 +6762,7 @@
 		)
 		(fp_arc
 			(start 0 -4.600001)
-			(mid 2.22998 -4.03287)
+			(mid 2.229979 -4.03287)
 			(end 3.9 -2.45)
 			(stroke
 				(width 0.127)
@@ -6938,7 +6938,7 @@
 		)
 		(fp_arc
 			(start 0 -4.600001)
-			(mid 2.22998 -4.03287)
+			(mid 2.229979 -4.03287)
 			(end 3.9 -2.45)
 			(stroke
 				(width 0.127)
@@ -8099,7 +8099,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R6"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "faff44c1-995d-4d1b-a9d3-00396b089d3f")
@@ -8111,7 +8111,7 @@
 			)
 		)
 		(property "Value" "22k1"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "F.Fab")
 			(uuid "07ef1701-6714-4ea2-bf11-daac99ce714d")
 			(effects
@@ -8247,7 +8247,7 @@
 			(uuid "1d7ea96f-c378-44fa-a06e-d37b377c019b")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "e519a002-7b69-4e20-8abc-28d4a24f8a0c")
 			(effects
@@ -11416,7 +11416,7 @@
 			)
 		)
 		(property "Footprint" "MBRS130L3TG:DIODE_SMB_2L_ONS"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "cee79159-f872-4acb-8113-5a181a974c8a")
@@ -11429,7 +11429,7 @@
 			)
 		)
 		(property "Datasheet" "MBRS130LT3G"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "4c8e4318-57ec-4617-b7ce-dcecfc3276ab")
@@ -11442,7 +11442,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "b69f6a06-7f84-423a-ba1c-b1884bdc6f20")
@@ -11990,7 +11990,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R3"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "e567d299-1e91-408b-9b09-a954d5fd1758")
@@ -12003,7 +12003,7 @@
 			)
 		)
 		(property "Value" "TBD"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "B.Fab")
 			(uuid "892c8e2c-3e24-4116-94a0-e9df419fc23f")
 			(effects
@@ -12143,7 +12143,7 @@
 			(uuid "e9a2d45a-5f65-4709-b64e-f4cba4327d3d")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(uuid "ea1f2709-885a-405e-8158-e1fc029f075d")
 			(effects
@@ -13196,7 +13196,7 @@
 		(descr "Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R1"
-			(at 0 1.82 360)
+			(at 0 1.82 0)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "f0a87e89-2cfd-4806-a3cc-31822491d69e")
@@ -13209,7 +13209,7 @@
 			)
 		)
 		(property "Value" "TBD"
-			(at 0 -1.82 360)
+			(at 0 -1.82 0)
 			(layer "B.Fab")
 			(uuid "912e7025-2e3e-4242-a003-8ef0d804122d")
 			(effects
@@ -13349,7 +13349,7 @@
 			(uuid "d52bce9f-a4cf-4c4d-a362-ec5201f9d2bc")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(uuid "8d01164b-417a-471a-8ece-4037a9e719cc")
 			(effects
