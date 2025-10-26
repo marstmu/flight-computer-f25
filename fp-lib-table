@@ -5,4 +5,5 @@
   (lib (name "ESP32-WROOM-32-N4")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/ESP32-WROOM-32-N4/KiCADv6/footprints.pretty")(options "")(descr ""))
   (lib (name "AT-1127-ST-2-R")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/AT-1127-ST-2-R/footprints.pretty")(options "")(descr ""))
   (lib (name "B2B-PH-K-S")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/B2B-PH-K-S/footprints.pretty")(options "")(descr ""))
+  (lib (name "HNB09A03")(type "KiCad")(uri "${KIPRJMOD}/HNB09A03.pretty")(options "")(descr ""))
 )
