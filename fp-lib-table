@@ -6,4 +6,6 @@
   (lib (name "AT-1127-ST-2-R")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/AT-1127-ST-2-R/footprints.pretty")(options "")(descr ""))
   (lib (name "B2B-PH-K-S")(type "KiCad")(uri "C:/Users/user/Documents/KiCad Projects/Libraries/B2B-PH-K-S/footprints.pretty")(options "")(descr ""))
   (lib (name "HNB09A03")(type "KiCad")(uri "${KIPRJMOD}/HNB09A03.pretty")(options "")(descr ""))
+  (lib (name "LDO")(type "KiCad")(uri "${KIPRJMOD}/LDO.pretty")(options "")(descr ""))
+  (lib (name "Diode")(type "KiCad")(uri "${KIPRJMOD}/Diode.pretty")(options "")(descr ""))
 )

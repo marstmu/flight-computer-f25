@@ -3205,318 +3205,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Morten_Library.kicad_sym_9:LED_Small"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at -1.27 3.175 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "LED_Small"
-				(at -4.445 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Light emitting diode, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pin" "1=K 2=A"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "LED diode light-emitting-diode"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "LED_Small_0_1"
-				(polyline
-					(pts
-						(xy -0.762 -1.016) (xy -0.762 1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.762) (xy -0.508 1.27) (xy -0.254 1.27) (xy -0.508 1.27) (xy -0.508 1.016)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.508 1.27) (xy 0 1.778) (xy 0.254 1.778) (xy 0 1.778) (xy 0 1.524)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 -1.016) (xy -0.762 0) (xy 0.762 1.016) (xy 0.762 -1.016)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 0) (xy -0.762 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "LED_Small_1_1"
-				(pin passive line
-					(at -2.54 0 0)
-					(length 1.778)
-					(name "K"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 0 180)
-					(length 1.778)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Morten_Library.kicad_sym_9:R_Small"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "R"
-				(at 0.762 0.508 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "R_Small"
-				(at 0.762 -1.016 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Resistor, small symbol"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "R resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "R_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "R_Small_0_1"
-				(rectangle
-					(start -0.762 1.778)
-					(end 0.762 -1.778)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_Small_1_1"
-				(pin passive line
-					(at 0 2.54 270)
-					(length 0.762)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -2.54 90)
-					(length 0.762)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Morten_Library.kicad_sym_9:SW_SPST"
 			(pin_names
 				(offset 0)
@@ -5170,10 +4858,10 @@
 		(uuid "9b609a19-6093-453e-8d80-fc1db80195ba")
 	)
 	(junction
-		(at 27.94 132.08)
+		(at 63.5 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "10fc3e33-3dd5-465a-8007-a0f018dafe4f")
+		(uuid "095e4d0b-a2a6-4bb1-bd2c-9e94b3f2b160")
 	)
 	(junction
 		(at 44.45 165.1)
@@ -5194,10 +4882,10 @@
 		(uuid "3fb8cb1e-96fd-45f4-b1df-743357108e33")
 	)
 	(junction
-		(at 76.2 132.08)
+		(at 16.51 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7a387e9c-1c8d-40f6-b95c-575c422625b5")
+		(uuid "63e152c6-e727-43d2-b2aa-74860e6d1df9")
 	)
 	(junction
 		(at 190.5 52.07)
@@ -5288,10 +4976,6 @@
 		(uuid "53bcd66f-e332-4de0-96fb-7cd2e8b1ceb1")
 	)
 	(no_connect
-		(at 53.34 134.62)
-		(uuid "549e8144-c455-46a2-a9dc-3b73e6d51039")
-	)
-	(no_connect
 		(at 45.72 64.77)
 		(uuid "5b4227e8-9003-4602-b2d1-6369e05f214b")
 	)
@@ -5314,6 +4998,10 @@
 	(no_connect
 		(at 251.46 57.15)
 		(uuid "6ca55260-6d3b-4d5e-b2be-95e2f7555418")
+	)
+	(no_connect
+		(at 41.91 134.62)
+		(uuid "6dc15dad-9ece-4ed9-a6f4-a80c589e4ac8")
 	)
 	(no_connect
 		(at 251.46 97.79)
@@ -5413,16 +5101,6 @@
 	)
 	(wire
 		(pts
-			(xy 34.29 132.08) (xy 27.94 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "022ab72d-d871-47f8-948a-6d91bb2ff87d")
-	)
-	(wire
-		(pts
 			(xy 196.85 69.85) (xy 196.85 67.31)
 		)
 		(stroke
@@ -5433,13 +5111,23 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 140.97) (xy 88.9 139.7)
+			(xy 63.5 127) (xy 63.5 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "04d42c1f-eef5-4f87-8243-25db2a76f4fe")
+		(uuid "04e5659f-82fb-41c2-beb5-597792a395cf")
+	)
+	(wire
+		(pts
+			(xy 78.74 132.08) (xy 85.09 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07bd54f7-68a2-4afe-ab3e-b4430a800cac")
 	)
 	(wire
 		(pts
@@ -5473,16 +5161,6 @@
 	)
 	(wire
 		(pts
-			(xy 88.9 128.27) (xy 88.9 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0dc7bc57-6519-4969-bb25-fb1c4499d1b0")
-	)
-	(wire
-		(pts
 			(xy 118.11 68.58) (xy 121.92 68.58)
 		)
 		(stroke
@@ -5493,13 +5171,13 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 132.08) (xy 27.94 133.35)
+			(xy 63.5 142.24) (xy 63.5 147.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1b5c337c-1a6d-48ad-802d-9186ebf1bf60")
+		(uuid "17d80d09-4f84-47db-aee9-33423573fb10")
 	)
 	(wire
 		(pts
@@ -5520,16 +5198,6 @@
 			(type default)
 		)
 		(uuid "1b9f86ba-4a11-427b-9a8f-cfb35bb1a3c1")
-	)
-	(wire
-		(pts
-			(xy 44.45 132.08) (xy 53.34 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1d764ab5-212f-4ccd-894d-ef34c623c374")
 	)
 	(wire
 		(pts
@@ -5560,16 +5228,6 @@
 			(type default)
 		)
 		(uuid "222c79de-c539-4bab-a758-f80e231caac5")
-	)
-	(wire
-		(pts
-			(xy 21.59 132.08) (xy 27.94 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "23859277-01b7-4c69-831e-4ec5b1d9688a")
 	)
 	(wire
 		(pts
@@ -5663,6 +5321,16 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 140.97) (xy 85.09 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ec57f80-311b-48cd-a096-05a089d67e98")
+	)
+	(wire
+		(pts
 			(xy 196.85 69.85) (xy 200.66 69.85)
 		)
 		(stroke
@@ -5680,6 +5348,16 @@
 			(type default)
 		)
 		(uuid "31b6a45a-e1ee-4844-b4bd-d736ff0a95d2")
+	)
+	(wire
+		(pts
+			(xy 63.5 132.08) (xy 71.12 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32443c66-d99e-4f24-b6f9-e878a40e51b8")
 	)
 	(wire
 		(pts
@@ -5723,6 +5401,16 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 132.08) (xy 85.09 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b15c9b1-a62e-4065-bd6c-517f5ef59712")
+	)
+	(wire
+		(pts
 			(xy 251.46 74.93) (xy 265.43 74.93)
 		)
 		(stroke
@@ -5753,13 +5441,13 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 127) (xy 76.2 132.08)
+			(xy 10.16 132.08) (xy 16.51 132.08)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4172e236-d0ed-49c1-a14c-42bb13d19bdd")
+		(uuid "40cd4a54-f95a-4a15-8485-063f9c67b481")
 	)
 	(wire
 		(pts
@@ -5790,16 +5478,6 @@
 			(type default)
 		)
 		(uuid "437cb77c-6247-4682-ab18-3da94f572dcd")
-	)
-	(wire
-		(pts
-			(xy 27.94 140.97) (xy 27.94 142.24)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "477c71d5-f638-4c28-9adc-dbd6b39abe01")
 	)
 	(wire
 		(pts
@@ -5863,13 +5541,13 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 140.97) (xy 76.2 143.51)
+			(xy 16.51 132.08) (xy 16.51 133.35)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "58332a8a-3c45-449a-bc44-2e88acaa502d")
+		(uuid "572b12af-dda6-45bd-84a4-c00e0d80fdc7")
 	)
 	(wire
 		(pts
@@ -5983,6 +5661,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 132.08) (xy 63.5 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71b60004-02d7-4ff2-9c71-6b2a2bf25380")
+	)
+	(wire
+		(pts
 			(xy 252.73 24.13) (xy 252.73 26.67)
 		)
 		(stroke
@@ -6063,16 +5751,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 132.08) (xy 76.2 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8b498b19-dc62-4003-bf11-041348193e98")
-	)
-	(wire
-		(pts
 			(xy 133.35 25.4) (xy 138.43 25.4)
 		)
 		(stroke
@@ -6120,16 +5798,6 @@
 			(type default)
 		)
 		(uuid "97faf5fe-503f-42b9-a823-3d9a4c6aa608")
-	)
-	(wire
-		(pts
-			(xy 60.96 142.24) (xy 60.96 143.51)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9aa49bef-e6bb-4e0d-9d10-b68b4ddb42b7")
 	)
 	(wire
 		(pts
@@ -6213,13 +5881,23 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 132.08) (xy 76.2 133.35)
+			(xy 49.53 142.24) (xy 49.53 143.51)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ae4a29e3-f6e6-4145-b91a-b12ce32a9117")
+		(uuid "afb7f2c1-d306-41ba-835c-d02fd0a0db77")
+	)
+	(wire
+		(pts
+			(xy 33.02 132.08) (xy 41.91 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdc28932-9fcc-4159-9dfb-57d1b8361b4a")
 	)
 	(wire
 		(pts
@@ -6273,6 +5951,16 @@
 	)
 	(wire
 		(pts
+			(xy 57.15 132.08) (xy 63.5 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c99fd97f-6429-4c54-8f69-457c1b709062")
+	)
+	(wire
+		(pts
 			(xy 119.38 36.83) (xy 119.38 40.64)
 		)
 		(stroke
@@ -6310,6 +5998,16 @@
 			(type default)
 		)
 		(uuid "d206b286-97f0-4ee6-a1e1-85e4d6e116f4")
+	)
+	(wire
+		(pts
+			(xy 16.51 140.97) (xy 16.51 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4952c2d-1808-462f-b328-b5de71461aa7")
 	)
 	(wire
 		(pts
@@ -6450,6 +6148,16 @@
 			(type default)
 		)
 		(uuid "f8084dfb-89a3-49dd-a898-ccf9ee2f6589")
+	)
+	(wire
+		(pts
+			(xy 22.86 132.08) (xy 16.51 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa7f285d-1598-4c8a-a01e-aba3b492c4ba")
 	)
 	(label "SDA"
 		(at 105.41 134.62 0)
@@ -6687,28 +6395,6 @@
 			)
 		)
 	)
-	(global_label "BAT+"
-		(shape input)
-		(at 21.59 132.08 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "38326143-3a40-4029-bd16-121e96b4db80")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 13.7062 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "USB_D-"
 		(shape input)
 		(at 45.72 52.07 0)
@@ -6727,6 +6413,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BAT+"
+		(shape input)
+		(at 10.16 132.08 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "667a05ee-42f7-4c3d-9427-5cf6dbe6b87f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 2.2762 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -6849,92 +6557,6 @@
 			(project ""
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "R4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Regulator_Linear:AP2112K-3.3")
-		(at 60.96 134.62 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "038d1c74-6c2d-4e8e-b979-53bc43bc6335")
-		(property "Reference" "U5"
-			(at 60.96 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "AP2112K-3.3"
-			(at 60.96 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-			(at 60.96 126.365 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2112.pdf"
-			(at 60.96 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "600mA low dropout linear regulator, with enable pin, 3.8V-6V input voltage range, 3.3V fixed positive output, SOT-23-5"
-			(at 60.96 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C3021085"
-			(at 60.96 134.62 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4182f5e1-e79d-436f-ace1-edd2ae860e52")
-		)
-		(pin "3"
-			(uuid "c4804b80-6fba-4701-a5f3-c1ffa65f43a5")
-		)
-		(pin "2"
-			(uuid "de3e4a1e-5c43-4e82-b6f4-abac8f0eec61")
-		)
-		(pin "4"
-			(uuid "94feaf67-b228-4d44-9b51-7abf8339f0da")
-		)
-		(pin "5"
-			(uuid "2bb1ab1d-e3f7-4f7c-8caf-4d31b88f367e")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -7760,72 +7382,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 60.96 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1a7aa733-6469-44ce-8141-e7e03d07d06b")
-		(property "Reference" "#PWR031"
-			(at 60.96 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 60.96 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 60.96 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3a362b67-7e9b-4cf3-b7e0-18a02ed74ce9")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR031")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3V3")
 		(at 121.92 114.3 0)
 		(unit 1)
@@ -7960,85 +7516,6 @@
 		)
 	)
 	(symbol
-		(lib_id "MBRS130LT3G:MBRS130LT3G")
-		(at 34.29 132.08 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "28265038-7d16-45e9-bf05-d1e9a79f13ae")
-		(property "Reference" "CR1"
-			(at 39.37 125.73 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "MBRS130LT3G"
-			(at 39.37 128.27 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "MBRS130L3TG:DIODE_SMB_2L_ONS"
-			(at 34.29 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "MBRS130LT3G"
-			(at 34.29 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 34.29 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C51771"
-			(at 34.29 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "029ff6f0-d145-4648-b23d-99fe95bf3e6c")
-		)
-		(pin "1"
-			(uuid "98f428d0-3f82-4739-9ab1-ae22a57d2330")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "CR1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 243.84 30.48 0)
 		(unit 1)
@@ -8112,6 +7589,72 @@
 			(project ""
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "R2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 85.09 147.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2bf56bcc-5b0b-44de-be16-6945c019fe86")
+		(property "Reference" "#PWR025"
+			(at 85.09 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 85.09 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 85.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 85.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 85.09 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6f08c7b3-1b63-43b7-bf16-55c259b33825")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -8741,71 +8284,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Morten_Library.kicad_sym_9:GND")
-		(at 88.9 140.97 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3f36e0b3-aac0-4845-b1e8-4b5a2cd453c3")
-		(property "Reference" "#PWR051"
-			(at 88.9 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 88.9 144.78 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 88.9 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 88.9 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 88.9 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9b8664a1-e18a-47c7-a199-6f79ea1792c9")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR051")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 24.13 195.58 0)
 		(unit 1)
@@ -9147,34 +8625,17 @@
 		)
 	)
 	(symbol
-		(lib_id "Morten_Library.kicad_sym_9:R_Small")
-		(at 88.9 132.08 0)
+		(lib_id "power:GND")
+		(at 16.51 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4a6ff23b-5752-478d-8a21-61c2b26130f5")
-		(property "Reference" "R8"
-			(at 90.424 131.064 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1K"
-			(at 90.678 133.096 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 88.9 132.08 0)
+		(fields_autoplaced yes)
+		(uuid "4a89417d-c320-4fc2-b1f8-a5eef8563b26")
+		(property "Reference" "#PWR05"
+			(at 16.51 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9182,8 +8643,16 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 88.9 132.08 0)
+		(property "Value" "GND"
+			(at 16.51 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 16.51 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9191,8 +8660,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
-			(at 88.9 132.08 0)
+		(property "Datasheet" ""
+			(at 16.51 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9200,16 +8669,22 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "f0dcf34b-ba60-4719-939a-464a4a1dcf13")
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 16.51 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "455bea9c-1b82-4fd6-a201-4898083bb399")
+			(uuid "f7fc1985-7805-4791-8e51-d7d5b0ac47c5")
 		)
 		(instances
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "R8")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -10003,17 +9478,33 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 27.94 142.24 0)
+		(lib_id "Regulator_Linear:AP2112K-3.3")
+		(at 49.53 134.62 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "5d4b574a-2add-4f45-82cf-9e4a5a148d79")
-		(property "Reference" "#PWR030"
-			(at 27.94 148.59 0)
+		(uuid "638d591f-eb47-45e6-ab48-ff53ac70016e")
+		(property "Reference" "U5"
+			(at 49.53 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AP2112K-3.3"
+			(at 49.53 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "LDO:SOT_RG1_DIO"
+			(at 49.53 126.365 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10021,16 +9512,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 27.94 147.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 27.94 142.24 0)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2112.pdf"
+			(at 49.53 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10038,8 +9521,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 27.94 142.24 0)
+		(property "Description" "600mA low dropout linear regulator, with enable pin, 3.8V-6V input voltage range, 3.3V fixed positive output, SOT-23-5"
+			(at 49.53 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10047,8 +9530,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 142.24 0)
+		(property "LCSC" "C3021085"
+			(at 49.53 134.62 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10057,12 +9540,24 @@
 			)
 		)
 		(pin "1"
-			(uuid "ba14e58a-2bb3-4762-af59-22b8050cda16")
+			(uuid "74aae99f-b10c-47fb-a210-445d79a46908")
+		)
+		(pin "3"
+			(uuid "c55162ab-c4d2-4153-9646-84055cb77eb0")
+		)
+		(pin "2"
+			(uuid "47a3067a-bf33-4aca-bf06-628818006244")
+		)
+		(pin "4"
+			(uuid "d2544c7b-7598-4e69-bac3-4b68db996bf9")
+		)
+		(pin "5"
+			(uuid "89b81107-a017-48c7-bebb-9284a940f269")
 		)
 		(instances
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR030")
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -10886,72 +10381,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 76.2 143.51 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "78888acd-ea60-4a67-b149-f0969bfde186")
-		(property "Reference" "#PWR032"
-			(at 76.2 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 76.2 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 76.2 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 76.2 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 76.2 143.51 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "58b348d5-ddd9-4f05-ae42-7419707586ee")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR032")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 62.23 165.1 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11145,84 +10574,6 @@
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "#PWR02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Morten_Library.kicad_sym_9:LED_Small")
-		(at 88.9 137.16 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "84c6bcf2-1f23-4d15-997f-3080d0eebaa2")
-		(property "Reference" "D5"
-			(at 90.932 136.398 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "GREEN"
-			(at 90.678 138.176 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
-			(at 88.9 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 88.9 137.16 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Light emitting diode, small symbol"
-			(at 88.9 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pin" "1=K 2=A"
-			(at 88.9 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "04eb63e3-ce06-4f68-9572-555c443b398e")
-		)
-		(pin "2"
-			(uuid "c993ca6b-eed3-4e05-8852-967498746c77")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -11659,35 +11010,35 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 27.94 137.16 0)
+		(lib_id "Device:LED")
+		(at 85.09 137.16 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "92719fe7-d5d7-406e-926b-4cacde4922e2")
-		(property "Reference" "C10"
-			(at 31.75 135.8899 0)
+		(uuid "940e7a33-4505-4fb5-8351-b307ec720aa7")
+		(property "Reference" "D2"
+			(at 88.9 137.4774 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "1uF"
-			(at 31.75 138.4299 0)
+		(property "Value" "LED"
+			(at 88.9 140.0174 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 28.9052 140.97 0)
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
+			(at 85.09 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11696,7 +11047,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 27.94 137.16 0)
+			(at 85.09 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11704,8 +11055,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
-			(at 27.94 137.16 0)
+		(property "Description" "Light emitting diode"
+			(at 85.09 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11713,8 +11064,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C52923"
-			(at 27.94 137.16 0)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 85.09 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11722,16 +11073,91 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
-			(uuid "7b9eabee-a23c-44e0-a0ba-a99941f55e76")
+		(property "LCSC" "C2286"
+			(at 85.09 137.16 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "1"
-			(uuid "305db3b1-446b-4840-abe3-fc2dbb3f3bf2")
+			(uuid "fc3155b7-870f-4c1a-a2b0-7ff12c812bf7")
+		)
+		(pin "2"
+			(uuid "fc4eb8e3-bc67-4490-b28b-62beafd8f577")
 		)
 		(instances
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "C10")
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 63.5 147.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "94e53b33-f056-4300-8cb5-16be352b6e6d")
+		(property "Reference" "#PWR09"
+			(at 63.5 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 63.5 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 63.5 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 63.5 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 63.5 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1d2ba15c-68f3-429c-952b-5dcb448e5412")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -11804,17 +11230,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 76.2 127 0)
+		(lib_id "power:GND")
+		(at 49.53 143.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "970330f9-12a3-42b4-a13b-c2d2b3a942a9")
-		(property "Reference" "#PWR033"
-			(at 76.2 130.81 0)
+		(uuid "95deaa9c-da74-4190-b294-7ea681d23972")
+		(property "Reference" "#PWR07"
+			(at 49.53 149.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11822,8 +11248,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3V3"
-			(at 76.2 121.92 0)
+		(property "Value" "GND"
+			(at 49.53 148.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11831,7 +11257,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 76.2 127 0)
+			(at 49.53 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11840,7 +11266,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 76.2 127 0)
+			(at 49.53 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11848,8 +11274,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 76.2 127 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 49.53 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11858,12 +11284,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "fd071479-bae3-4201-980d-222d7f62d9c1")
+			(uuid "e0932be3-9611-46d0-9910-6726462a24f0")
 		)
 		(instances
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR033")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -11930,6 +11356,85 @@
 			(project ""
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 16.51 137.16 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "99f4655d-1b12-4df5-899e-2cea6621e3a1")
+		(property "Reference" "C10"
+			(at 20.32 135.8899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 20.32 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 17.4752 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 16.51 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 16.51 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C52923"
+			(at 16.51 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "76d11e6f-818c-4cf7-910a-2513e223ab04")
+		)
+		(pin "1"
+			(uuid "49496c63-7cc0-42c9-b0e2-68f164c41627")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "C10")
 					(unit 1)
 				)
 			)
@@ -12072,71 +11577,6 @@
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "#PWR035")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Morten_Library.kicad_sym_9:+3V3")
-		(at 88.9 128.27 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a6b2fdaa-6d39-4ad0-92af-f04be0b5723e")
-		(property "Reference" "#PWR050"
-			(at 88.9 132.08 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 88.9 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 88.9 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 88.9 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 88.9 128.27 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e62b8f39-0a36-47aa-b240-6228243a0379")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "#PWR050")
 					(unit 1)
 				)
 			)
@@ -12359,85 +11799,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 76.2 137.16 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b3932e8f-92ed-467f-8976-fb70ecffbedb")
-		(property "Reference" "C11"
-			(at 80.01 135.8899 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1uF"
-			(at 80.01 138.4299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 77.1652 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 76.2 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 76.2 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C52923"
-			(at 76.2 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5c0aced0-2521-47a7-9b56-ff718bd9c94a")
-		)
-		(pin "1"
-			(uuid "74c5e578-05df-4180-9b84-8c4d5d6ef5f6")
-		)
-		(instances
-			(project "EggtimerIon"
-				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
-					(reference "C11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "AT-1127-ST-2-R:AT-1127-ST-2-R")
 		(at 137.16 74.93 0)
 		(unit 1)
@@ -12647,6 +12008,84 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 63.5 138.43 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c2ad3338-b845-483a-9a8c-549da991e6d6")
+		(property "Reference" "C11"
+			(at 67.31 137.1599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 67.564 139.446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 64.4652 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 63.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 63.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C52923"
+			(at 63.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "b95f2386-84d4-4985-a1d2-1b6c9e9a631f")
+		)
+		(pin "1"
+			(uuid "20166837-76ab-4366-8e4b-4ce1447f015d")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 273.05 53.34 180)
 		(unit 1)
@@ -12719,6 +12158,85 @@
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MBRS130LT3G:MBRS130LT3G")
+		(at 22.86 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cddd8cfe-1a9c-46c5-b3ae-d5d7af47c96d")
+		(property "Reference" "CR1"
+			(at 27.94 125.73 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "MBRS130LT3G"
+			(at 27.94 128.27 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "Diode:DIODE_SMB_2L_ONS"
+			(at 22.86 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "MBRS130LT3G"
+			(at 22.86 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 22.86 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C51771"
+			(at 22.86 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "52295632-34c7-405c-bd1c-659502aa687a")
+		)
+		(pin "1"
+			(uuid "b0ee3bf1-0320-445d-bec6-abf3c6783006")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "CR1")
 					(unit 1)
 				)
 			)
@@ -13014,6 +12532,72 @@
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "#PWR039")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 63.5 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e3af2442-9b2d-4f9e-9f43-9f267c7901f7")
+		(property "Reference" "#PWR08"
+			(at 63.5 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 63.5 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 63.5 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 63.5 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 63.5 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9a9146d5-1938-45ad-9b61-ce83afe762c6")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -13499,6 +13083,83 @@
 			(project "EggtimerIon"
 				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
 					(reference "#PWR026")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 74.93 132.08 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f80310c7-df17-4469-a9e4-2b295bed385a")
+		(property "Reference" "R7"
+			(at 74.93 125.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1.5k"
+			(at 74.93 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 74.93 133.858 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 74.93 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 74.93 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25867"
+			(at 74.93 132.08 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d48d33d1-fa6d-4cee-9ede-db9c92164444")
+		)
+		(pin "1"
+			(uuid "16a5f7b3-9ba9-4b50-9a9d-4cdaa636749e")
+		)
+		(instances
+			(project "EggtimerIon"
+				(path "/80f39b76-9e28-453d-9ac1-140400218a95"
+					(reference "R7")
 					(unit 1)
 				)
 			)
