@@ -8,4 +8,6 @@
   (lib (name "HNB09A03")(type "KiCad")(uri "${KIPRJMOD}/HNB09A03.pretty")(options "")(descr ""))
   (lib (name "LDO")(type "KiCad")(uri "${KIPRJMOD}/LDO.pretty")(options "")(descr ""))
   (lib (name "Diode")(type "KiCad")(uri "${KIPRJMOD}/Diode.pretty")(options "")(descr ""))
+  (lib (name "ESP")(type "KiCad")(uri "${KIPRJMOD}/ESP.pretty")(options "")(descr ""))
+  (lib (name "Mount")(type "KiCad")(uri "${KIPRJMOD}/Mount.pretty")(options "")(descr ""))
 )

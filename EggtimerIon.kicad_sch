@@ -6468,7 +6468,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_JLCPCB:Hole, 3mm"
+		(property "Footprint" "Mount:hole"
 			(at 78.74 31.75 0)
 			(effects
 				(font
@@ -6532,7 +6532,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_JLCPCB:Hole, 3mm"
+		(property "Footprint" "Mount:hole"
 			(at 78.74 24.13 0)
 			(effects
 				(font
@@ -6662,7 +6662,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "PCM_JLCPCB:Hole, 3mm"
+		(property "Footprint" "Mount:hole"
 			(at 78.74 39.37 0)
 			(effects
 				(font
@@ -12632,7 +12632,7 @@
 				)
 			)
 		)
-		(property "Footprint" "RF_Module:ESP32-S3-WROOM-1"
+		(property "Footprint" "ESP:ESP32-S3-WROOM-1_EXP"
 			(at 226.06 47.625 0)
 			(effects
 				(font
