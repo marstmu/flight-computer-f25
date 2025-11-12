@@ -10965,7 +10965,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2286"
+		(property "LCSC" "C2290"
 			(at 110.49 176.53 90)
 			(effects
 				(font
@@ -12196,7 +12196,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2290"
+		(property "LCSC" "C2288"
 			(at 218.44 24.13 0)
 			(effects
 				(font
@@ -12645,7 +12645,7 @@
 				)
 			)
 		)
-		(property "Value" "2k"
+		(property "Value" "270R"
 			(at 229.87 21.59 90)
 			(effects
 				(font
@@ -12680,7 +12680,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C4109"
+		(property "LCSC" "C25099"
 			(at 229.87 24.13 0)
 			(effects
 				(font
