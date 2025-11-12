@@ -9,7 +9,7 @@
 		(date "2025-11-07")
 		(rev "v1.0.1")
 		(company "Metropolitan Aerospace Rocket Society")
-		(comment 1 "Author: Fawaaz Kamali Siddiqui & Anthony Dalgleish")
+		(comment 1 "Author: Anthony Dalgleish")
 	)
 	(lib_symbols
 		(symbol "AT-1127-ST-2-R:AT-1127-ST-2-R"
@@ -12645,7 +12645,7 @@
 				)
 			)
 		)
-		(property "Value" "270R"
+		(property "Value" "120R"
 			(at 229.87 21.59 90)
 			(effects
 				(font
@@ -12680,7 +12680,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25099"
+		(property "LCSC" "C25079"
 			(at 229.87 24.13 0)
 			(effects
 				(font
@@ -13203,7 +13203,7 @@
 				)
 			)
 		)
-		(property "Value" "1.5k"
+		(property "Value" "820R"
 			(at 100.33 167.64 90)
 			(effects
 				(font
@@ -13238,7 +13238,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25867"
+		(property "LCSC" "C25135"
 			(at 100.33 171.45 90)
 			(effects
 				(font
