@@ -1,0 +1,55 @@
+name: Rotate Board Images
+
+on:
+  workflow_run:
+    workflows: ["Export KiCad Images"]
+    types:
+      - success
+
+permissions:
+  contents: write
+
+jobs:
+  rotate-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick inkscape
+
+      - name: Rotate 3D renders (PNG)
+        run: |
+          echo "Rotating 3D renders..."
+          convert images/board.front.png -rotate 90 images/tmp.png && mv images/tmp.png images/board.front.png
+          convert images/board.back.png  -rotate 180 images/tmp.png && mv images/tmp.png images/board.back.png
+
+      - name: Rotate silkscreens (SVGs, vector-safe)
+        run: |
+          echo "Rotating SVG silkscreens..."
+          # Leave the front silkscreen (pcbf.svg) unchanged
+          echo "Skipping rotation for pcbf.svg"
+
+          # Rotate the back silkscreen 180° and resize canvas
+          inkscape images/pcbb.svg \
+            --batch-process \
+            --actions="select-all;transform-rotate:180;fitcanvas-to-drawing;export-filename:images/tmp.svg;export-do" 2>/dev/null
+          mv images/tmp.svg images/pcbb.svg
+
+      # Custom Git identity
+      - name: Configure Git
+        run: |
+          git config user.name "Image Rotate App"
+          git config user.email "123456+MyImageApp[bot]@users.noreply.github.com"
+
+      # Commit and push using GitHub App token
+      - name: Commit changes using the App token
+        run: |
+          git add images/*
+          git commit -m "Rotate board and silkscreen images" || echo "No changes to commit."
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push origin main
