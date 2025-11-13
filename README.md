@@ -6,7 +6,7 @@
 
 <div align="center">
   <div>
-    <img src="images/board.front.png" alt="3D Render" style="height: auto; width: 400px;">
+    <img src="images/board.front.png" alt="3D Render" style="height: auto; width: 300px;">
     <img src="images/board.back.png" alt="3D Render" style="height: auto; width: 400px;">
     <p><em>3D Render</em></p>
   </div>
