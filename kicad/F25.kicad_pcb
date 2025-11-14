@@ -3171,14 +3171,7 @@
 			(uuid "6067f614-cbf5-4fe8-88fb-368eabec45ca")
 		)
 		(embedded_fonts no)
-		(embedded_files
-			(file
-				(name "B2B-PH-K-S.STEP")
-				(type model)
-				(checksum "FCBBB29DB2B371E0BA7132FBF51A984C")
-			)
-		)
-		(model "kicad-embed://B2B-PH-K-S.STEP"
+		(model "${KIPRJMOD}/step files/B2B-PH-K-S--3DModel-STEP-56544.STEP"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4589,22 +4582,15 @@
 			(uuid "e0f29da0-d5b3-4668-96d4-bc0dec8d20d6")
 		)
 		(embedded_fonts no)
-		(embedded_files
-			(file
-				(name "KH-TYPE-C-16P--3DModel-STEP-269445.STEP")
-				(type model)
-				(checksum "3D00A7EE787D460D0FFDC8774BF65A55")
-			)
-		)
-		(model "kicad-embed://KH-TYPE-C-16P--3DModel-STEP-269445.STEP"
+		(model "${KICAD8_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.step"
 			(offset
-				(xyz 0 -1 0)
+				(xyz 0 -1.2 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz -90 -0 -0)
+				(xyz -0 -0 -0)
 			)
 		)
 	)
@@ -6291,16 +6277,9 @@
 			)
 		)
 		(embedded_fonts no)
-		(embedded_files
-			(file
-				(name "MBRS130LT3G.STEP")
-				(type model)
-				(checksum "E0D9F44FDBB742D82AAF065006E681EA")
-			)
-		)
-		(model "kicad-embed://MBRS130LT3G.STEP"
+		(model "${KIPRJMOD}/step files/MBRS130LT3G.STEP"
 			(offset
-				(xyz 0 0 1.65)
+				(xyz 0 0 1.7)
 			)
 			(scale
 				(xyz 1 1 1)
@@ -9434,14 +9413,7 @@
 			(uuid "53d588ed-8a29-4cd1-96d5-fbe275b0c42e")
 		)
 		(embedded_fonts no)
-		(embedded_files
-			(file
-				(name "AP2112K-3.3TRG1.STEP")
-				(type model)
-				(checksum "7E06750AD31D392C4EFD64587F79172C")
-			)
-		)
-		(model "kicad-embed://AP2112K-3.3TRG1.STEP"
+		(model "${KIPRJMOD}/step files/AP2112K-3.3TRG1--3DModel-STEP-418109.STEP"
 			(offset
 				(xyz 0 0 0)
 			)
