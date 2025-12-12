@@ -770,7 +770,7 @@ void startAPAndServer() {
     out += "<ul>";
 
     File root = FFat.open("/");
-    if (!root) {
+    if (!root || !root.isDirectory()) {
       out += "<li>FFat open root failed</li>";
     } else {
       File f = root.openNextFile();
@@ -778,8 +778,10 @@ void startAPAndServer() {
         String name = String(f.name());
         size_t sz = f.size();
         out += "<li><a href='/download?file=" + name + "'>" + name + "</a> (" + String((unsigned long)sz) + " bytes)</li>";
+        f.close();                 // IMPORTANT
         f = root.openNextFile();
       }
+      root.close();                // IMPORTANT
     }
 
     out += "</ul></body></html>";
