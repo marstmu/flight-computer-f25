@@ -57,6 +57,15 @@ Quaternion q;
 VectorFloat gravity;
 float ypr[3];   // yaw, pitch, roll (rad)
 float ypr_offset[3] = {0, 0, 0};
+// DMP linear acceleration (gravity removed)
+VectorInt16 aa;       // raw accel from DMP packet
+VectorInt16 aaReal;   // accel with gravity removed (sensor frame)
+VectorInt16 aaWorld;  // accel rotated into world frame
+
+// World-frame Z linear acceleration in m/s^2 (updated in read_dmp)
+volatile float linAccWorldZ_mps2 = NAN;
+
+static constexpr float G_MPS2 = 9.80665f;
 
 int16_t ax_raw, ay_raw, az_raw;
 int16_t gx_raw, gy_raw, gz_raw;
@@ -144,10 +153,9 @@ static constexpr float APOGEE_VEL_NEG_THRESH_MPS = -1.5f;
 static constexpr float APOGEE_DROP_THRESH_M = 2.0f;
 static constexpr uint16_t APOGEE_CONFIRM_SAMPLES = 8;
 
-static constexpr float LAND_VEL_ABS_THRESH_MPS = 1.5f;
-static constexpr float LAND_ALT_RANGE_M = 2.0f;
-static constexpr uint32_t LAND_STABLE_MS = 500;
-static constexpr uint32_t LAND_AFTER_APOGEE_DELAY_MS = 10000; // 5–10s (pick 5000..10000)
+static constexpr float LAND_VEL_ABS_THRESH_MPS = 0.35f;
+static constexpr float LAND_ALT_RANGE_M = 0.6f;
+static constexpr uint32_t LAND_STABLE_MS = 4000;
 
 static constexpr uint32_t POST_LAND_LOG_MS = 3000;
 
@@ -181,26 +189,23 @@ bool landingDetected = false;
 float maxHeight_m = -1e9f;
 uint16_t launchConfirm = 0;
 uint16_t apogeeConfirm = 0;
-uint32_t apogeeAtMs = 0;
 
 uint32_t landStableStartMs = 0;
 float landAltRef = 0.0f;
 uint32_t landedAtMs = 0;
 
-// Velocity estimation (windowed average altitude -> velocity)
-// Computes v = (avg(h) - avg(prev h)) / dt across a window to suppress baro noise.
-static constexpr uint8_t VELWIN = 25;   // window length in samples (LOGHZ=50 => 10 samples = 0.20 s)
+// Velocity estimation (IMU-integrated)
+uint32_t lastVelMs = 0;        // reused as last integration timestamp
+float vel_filt = 0.0f;         // filtered vertical speed output (m/s)
+float vel_int_mps = 0.0f;      // integrated vertical speed (m/s)
 
-float hWin[VELWIN] = {0};
-uint32_t tWin[VELWIN] = {0};
-uint8_t velIdx = 0;
-uint8_t velCount = 0;
-
-float lastAvgH = 0.0f;
-uint32_t lastAvgT = 0;
-float velfilt = 0.0f; // optional extra low-pass after windowing
-// Latest computed vertical speed for dashboard (updated in loop logging cadence)
-volatile float latest_vel_mps = 0.0f;
+// Bias estimate for linAccWorldZ_mps2 while sitting on the pad
+float accel_bias_mps2 = 0.0f;
+bool accel_bias_init = false;
+// Baro velocity estimate (altitude derivative)
+float baro_lastH = 0.0f;
+uint32_t baro_lastVelMs = 0;
+float baro_vel_filt = 0.0f;   // m/s
 
 // -------------------- FORWARD DECLARATIONS --------------------
 void ms5611_reset();
@@ -232,7 +237,6 @@ void handleData();
 void handleDeleteLogs();
 
 void startAPAndServer();
-void handleReset();
 void stopAPAndServer();
 
 void cachePush(const Sample &s);
@@ -243,6 +247,7 @@ void writeCsvHeader();
 void writeCsvRow(const Sample &s, const char* eventTag);
 
 float computeVerticalSpeed(float h_now, uint32_t now_ms);
+float computeBaroVerticalSpeed(float h_now, uint32_t now_ms);
 Sample makeSample(float vel_mps_now);
 const char* flightStateName(FlightState st);
 
@@ -445,11 +450,52 @@ void read_dmp() {
 
   while (fifoCount >= packetSize) {
     mpu.getFIFOBytes(fifoBuffer, packetSize);
+
     mpu.dmpGetQuaternion(&q, fifoBuffer);
     mpu.dmpGetGravity(&gravity, &q);
     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
 
+    // Compute linear acceleration (gravity removed), then rotate into world frame
+    mpu.dmpGetAccel(&aa, fifoBuffer);
+    mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
+    // --- Manual rotate linear accel into world frame (replacement for dmpGetLinearAccelInWorld) ---
+    // Rotate vector v by quaternion q: v' = q * v * q_conj
+    // Using the fast form: t = 2*cross(q.xyz, v), v' = v + q.w*t + cross(q.xyz, t)
+
+    float vx = (float)aaReal.x;
+    float vy = (float)aaReal.y;
+    float vz = (float)aaReal.z;
+
+    float qw = q.w;
+    float qx = q.x;
+    float qy = q.y;
+    float qz = q.z;
+
+    // t = 2 * cross(q.xyz, v)
+    float tx = 2.0f * (qy * vz - qz * vy);
+    float ty = 2.0f * (qz * vx - qx * vz);
+    float tz = 2.0f * (qx * vy - qy * vx);
+
+    // v' = v + qw*t + cross(q.xyz, t)
+    float wx = vx + qw * tx + (qy * tz - qz * ty);
+    float wy = vy + qw * ty + (qz * tx - qx * tz);
+    float wz = vz + qw * tz + (qx * ty - qy * tx);
+
+    // (Optional) store as VectorInt16 if you want it later
+    aaWorld.x = (int16_t)wx;
+    aaWorld.y = (int16_t)wy;
+    aaWorld.z = (int16_t)wz;
+
+    // Convert world Z from raw units -> g -> m/s^2 (ACCEL_SCALE is LSB/g at your accel FS)
+    linAccWorldZ_mps2 = (wz / ACCEL_SCALE) * G_MPS2;
+
+
+    // Convert world Z from raw units -> g -> m/s^2 (ACCEL_SCALE is LSB/g at your FS range)
+    linAccWorldZ_mps2 = ((float)aaWorld.z / ACCEL_SCALE) * G_MPS2;
+
+    // Keep your existing raw reads for logging/UI
     read_mpu_raw();
+
     fifoCount = mpu.getFIFOCount();
   }
 }
@@ -547,51 +593,83 @@ void closeLogFileSafe() {
   logOpen = false;
 }
 
-float computeVerticalSpeed(float hnow, uint32_t nowms) {
-  // Push into ring buffer
-  hWin[velIdx] = hnow;
-  tWin[velIdx] = nowms;
-  velIdx = (uint8_t)((velIdx + 1) % VELWIN);
-  if (velCount < VELWIN) velCount++;
+float computeVerticalSpeed(float h_now, uint32_t now_ms) {
+  (void)h_now; // velocity is now IMU-derived; baro height is still logged separately
 
-  // Until window is full, don't output noisy velocity
-  if (velCount < VELWIN) {
-    lastAvgH = hnow;
-    lastAvgT = nowms;
-    velfilt = 0.0f;
+  // If we don't have a valid accel yet, return the last filtered value
+  if (!isfinite(linAccWorldZ_mps2)) return vel_filt;
+
+  // While on the pad, track accel bias (should be ~0 m/s^2 after gravity removal)
+  if (flightState == ST_GROUND && !launchDetected) {
+    const float BIAS_ALPHA = 0.02f; // slow LPF bias learner
+    if (!accel_bias_init) {
+      accel_bias_mps2 = linAccWorldZ_mps2;
+      accel_bias_init = true;
+    } else {
+      accel_bias_mps2 = (1.0f - BIAS_ALPHA) * accel_bias_mps2 + BIAS_ALPHA * linAccWorldZ_mps2;
+    }
+
+    // Hold velocity at 0 on the pad
+    vel_int_mps = 0.0f;
+    vel_filt = 0.0f;
+    lastVelMs = now_ms;
     return 0.0f;
   }
 
-  // Compute average altitude and average time over the window
-  float sumH = 0.0f;
-  uint32_t sumT = 0;
-  for (uint8_t i = 0; i < VELWIN; i++) {
-    sumH += hWin[i];
-    sumT += tWin[i];
-  }
-  const float avgH = sumH / (float)VELWIN;
-  const uint32_t avgT = sumT / (uint32_t)VELWIN;
-
-  // Differentiate the averaged signal
-  if (lastAvgT == 0) {
-    lastAvgT = avgT;
-    lastAvgH = avgH;
+  // Initialize integration timebase on first use after leaving ground
+  if (lastVelMs == 0) {
+    lastVelMs = now_ms;
+    vel_int_mps = 0.0f;
+    vel_filt = 0.0f;
     return 0.0f;
   }
 
-  uint32_t dtms = avgT - lastAvgT;
-  if (dtms < 5) return velfilt; // avoid divide by tiny dt / repeated timestamps
+  uint32_t dt_ms = now_ms - lastVelMs;
+  if (dt_ms < 5) return vel_filt;
 
-  const float dt = dtms / 1000.0f;
-  const float v = (avgH - lastAvgH) / dt;
+  // Prevent a huge integration jump if something stalls briefly
+  if (dt_ms > 200) dt_ms = 200;
 
-  // Optional extra smoothing on top of the window (can set VELALPHA=1.0f to disable)
-  const float VELALPHA = 0.35f;
-  velfilt = VELALPHA * v + (1.0f - VELALPHA) * velfilt;
+  float dt = dt_ms / 1000.0f;
 
-  lastAvgT = avgT;
-  lastAvgH = avgH;
-  return velfilt;
+  float a_mps2 = linAccWorldZ_mps2 - accel_bias_mps2;
+
+  // Optional clamp against spikes (tune as needed)
+  const float A_CLAMP = 200.0f; // ~20g
+  if (a_mps2 >  A_CLAMP) a_mps2 =  A_CLAMP;
+  if (a_mps2 < -A_CLAMP) a_mps2 = -A_CLAMP;
+
+  vel_int_mps += a_mps2 * dt;
+
+  // Low-pass output for detection stability (keeps your existing behavior style)
+  const float VEL_ALPHA = 0.25f;
+  vel_filt = VEL_ALPHA * vel_int_mps + (1.0f - VEL_ALPHA) * vel_filt;
+
+  lastVelMs = now_ms;
+  return vel_filt;
+}
+
+float computeBaroVerticalSpeed(float h_now, uint32_t now_ms) {
+  if (baro_lastVelMs == 0) {
+    baro_lastVelMs = now_ms;
+    baro_lastH = h_now;
+    baro_vel_filt = 0.0f;
+    return 0.0f;
+  }
+
+  uint32_t dt_ms = now_ms - baro_lastVelMs;
+  if (dt_ms < 5) return baro_vel_filt;
+
+  float dt = dt_ms / 1000.0f;
+  float v = (h_now - baro_lastH) / dt;
+
+  // Low-pass velocity for robust detection (same style as old code)
+  const float VEL_ALPHA = 0.25f;
+  baro_vel_filt = VEL_ALPHA * v + (1.0f - VEL_ALPHA) * baro_vel_filt;
+
+  baro_lastVelMs = now_ms;
+  baro_lastH = h_now;
+  return baro_vel_filt;
 }
 
 Sample makeSample(float vel_mps_now) {
@@ -625,13 +703,20 @@ void updateFlightStateAndLogging(const Sample &s) {
 
   // ---------------- LAUNCH DETECT ----------------
   if (!launchDetected) {
-    bool cond = (s.h_m > LAUNCH_ALT_THRESH_M) && (s.vel_mps > LAUNCH_VEL_THRESH_MPS);
+    bool cond_baro = (s.h_m > LAUNCH_ALT_THRESH_M);              // baro altitude rise alone
+    bool cond_imu  = (s.vel_mps > LAUNCH_VEL_THRESH_MPS);        // IMU velocity threshold
+    bool cond = cond_baro || cond_imu;
     if (cond) launchConfirm++;
     else if (launchConfirm > 0) launchConfirm--;
 
     if (launchConfirm >= LAUNCH_CONFIRM_SAMPLES) {
       launchDetected = true;
       flightState = ST_FLIGHT;
+      // Reset IMU velocity integrator at the moment of launch
+      vel_int_mps = 0.0f;
+      vel_filt = 0.0f;
+      lastVelMs = 0;
+
 
       if (openNewLogFile()) {
         writeCsvRow(s, "EVENT_LAUNCH");
@@ -650,13 +735,14 @@ void updateFlightStateAndLogging(const Sample &s) {
 
     // APOGEE DETECT (requires descent + drop from max)
     if (!apogeeDetected) {
-      bool apCond = (s.vel_mps < APOGEE_VEL_NEG_THRESH_MPS) && ((maxHeight_m - s.h_m) > APOGEE_DROP_THRESH_M);
+      bool descending = (s.vel_mps < APOGEE_VEL_NEG_THRESH_MPS) ||
+                        (baro_vel_filt < APOGEE_VEL_NEG_THRESH_MPS);
+      bool apCond = descending && ((maxHeight_m - s.h_m) > APOGEE_DROP_THRESH_M);
       if (apCond) apogeeConfirm++;
       else if (apogeeConfirm > 0) apogeeConfirm--;
 
       if (apogeeConfirm >= APOGEE_CONFIRM_SAMPLES) {
         apogeeDetected = true;
-        apogeeAtMs = millis();
         tag = "EVENT_APOGEE";
       }
     }
@@ -673,9 +759,9 @@ void updateFlightStateAndLogging(const Sample &s) {
   }
 
   // ---------------- LANDING DETECT ----------------
-  if (flightState == ST_FLIGHT && apogeeDetected && !landingDetected &&
-    (millis() - apogeeAtMs) >= LAND_AFTER_APOGEE_DELAY_MS) {
-    bool velOk = fabsf(s.vel_mps) < LAND_VEL_ABS_THRESH_MPS;
+  if (flightState == ST_FLIGHT && apogeeDetected && !landingDetected) {
+    bool velOk = (fabsf(s.vel_mps) < LAND_VEL_ABS_THRESH_MPS) ||
+                 (fabsf(baro_vel_filt) < LAND_VEL_ABS_THRESH_MPS);
 
     if (velOk) {
       if (landStableStartMs == 0) {
@@ -779,7 +865,6 @@ void startAPAndServer() {
   server.on("/data", handleData);
   server.on("/setAltitude", HTTP_POST, handleSetAltitude);
   server.on("/zeroYPR", HTTP_POST, handleZeroYPR);
-  server.on("/reset", HTTP_POST, handleReset);
 
   // ---- Delete all CSV logs ----
   server.on("/deleteLogs", HTTP_POST, handleDeleteLogs);
@@ -994,13 +1079,10 @@ String htmlPage() {
       fetch('/data')
         .then(r => r.json())
         .then(data => {
-            document.getElementById('temp_ms5611').textContent = data.temp_ms5611.toFixed(1);
-            document.getElementById('pressure').textContent = data.pressure.toFixed(1);
-            document.getElementById('altitude').textContent = data.altitude.toFixed(2);
-            document.getElementById('altitude_type').textContent = data.altitude_type;
-
-            // Vertical speed (m/s)
-            document.getElementById('vel_mps').textContent = data.vel_mps.toFixed(2);
+          document.getElementById('temp_ms5611').textContent = data.temp_ms5611.toFixed(1);
+          document.getElementById('pressure').textContent = data.pressure.toFixed(1);
+          document.getElementById('altitude').textContent = data.altitude.toFixed(2);
+          document.getElementById('altitude_type').textContent = data.altitude_type;
 
           document.getElementById('temp_mpu').textContent = data.temp_mpu.toFixed(1);
           document.getElementById('ax_g').textContent = data.ax_g.toFixed(3);
@@ -1065,11 +1147,6 @@ String htmlPage() {
         });
     }
 
-    function doReset() {
-    if (!confirm("Reset the device now?")) return;
-    fetch("reset", { method: "POST" });
-    }
-
     function updateLoop() {
       updateData();
       requestAnimationFrame(updateLoop);
@@ -1101,7 +1178,6 @@ String htmlPage() {
 
       <div class="statusline">
         <button id="deleteBtn" class="danger-btn" onclick="deleteLogs()">Delete all CSV logs</button>
-        <button class="danger-btn" onclick="doReset()">Reset device</button>
         <div id="deleteHint" class="small">Deletes all .csv files in FFat.</div>
         <div id="deleteResult" class="small"></div>
       </div>
@@ -1119,13 +1195,12 @@ String htmlPage() {
     </div>
 
     <div class="temp-grid">
-        <div class="card">
+      <div class="card">
         <div class="sensor-title">MS5611 Barometer</div>
         <div>Temp: <span id="temp_ms5611" class="value">-</span><span class="unit"> °C</span></div>
         <div>Pressure: <span id="pressure" class="value">-</span><span class="unit"> mbar</span></div>
         <div><span id="altitude_type">Altitude</span>: <span id="altitude" class="value">-</span><span class="unit"> m</span></div>
-        <div>Vertical speed: <span id="vel_mps" class="value">-</span><span class="unit"> m/s</span></div>
-        </div>
+      </div>
 
       <div class="card">
         <div class="sensor-title">MPU6050 Temperature</div>
@@ -1198,11 +1273,6 @@ void handleSetAltitude() {
 void handleZeroYPR() {
   zeroYPR();
   server.send(200, "text/plain", "YPR zeroed");
-}
-void handleReset() {
-  server.send(200, "text/plain", "Rebooting...");
-  delay(150);
-  ESP.restart();
 }
 
 // NEW: delete all CSV logs in FFat root
@@ -1286,9 +1356,6 @@ void handleData() {
   json += "\"pressure\":" + String(p_ms, 1) + ",";
   json += "\"altitude\":" + String(alt, 2) + ",";
   json += "\"altitude_type\":\"" + alt_label + "\",";
-
-  // Vertical speed (m/s), computed in loop() at LOG_HZ cadence
-  json += "\"vel_mps\":" + String((float)latest_vel_mps, 2) + ",";
 
   json += "\"ax_g\":" + String(ax_g, 3) + ",";
   json += "\"ay_g\":" + String(ay_g, 3) + ",";
@@ -1425,13 +1492,18 @@ void loop() {
     nextLogMs += LOG_INTERVAL_MS;
 
     float h_now = isfinite(height_agl_m) ? (float)height_agl_m : 0.0f;
-    float v_now = computeVerticalSpeed(h_now, now);
 
-    // Publish for dashboard without re-running the estimator in handleData()
-    latest_vel_mps = v_now;
+    // IMU-based vertical speed (integrated accel)
+    float v_imu = computeVerticalSpeed(h_now, now);
 
-    Sample s = makeSample(v_now);
+    // Baro-based vertical speed (altitude derivative)
+    float v_baro = computeBaroVerticalSpeed(h_now, now);
+    (void)v_baro; // stored in baro_vel_filt for detection logic
+
+    // Keep logging IMU velocity (change to v_baro if you prefer baro in the CSV)
+    Sample s = makeSample(v_imu);
     updateFlightStateAndLogging(s);
+
   }
 
   // Web server only when AP is on
