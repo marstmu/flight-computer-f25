@@ -248,7 +248,11 @@ const char* flightStateName(FlightState st);
 
 void updateFlightStateAndLogging(const Sample &s);
 
-// -------------------- MS5611 low-level --------------------
+/**
+ * @brief Reset the MS5611 barometric sensor and wait for it to complete its internal reset.
+ *
+ * Issues the sensor reset command over SPI and delays briefly to allow the MS5611 to become ready.
+ */
 void ms5611_reset() {
   digitalWrite(CS_PIN, LOW);
   SPI.transfer(CMD_RESET);
@@ -256,6 +260,11 @@ void ms5611_reset() {
   delay(4);
 }
 
+/**
+ * @brief Reads the MS5611 PROM calibration coefficients into the global C[] array.
+ *
+ * Issues PROM read commands over SPI and stores the eight 16-bit calibration words returned by the sensor into C[0..7].
+ */
 void ms5611_read_prom() {
   for (int i = 0; i < 8; i++) {
     uint8_t addr = CMD_PROM_RD + (i * 2);
@@ -269,6 +278,14 @@ void ms5611_read_prom() {
   }
 }
 
+/**
+ * @brief Initiates an MS5611 ADC conversion using the given command.
+ *
+ * Sends the specified conversion command to the MS5611 over SPI, records the
+ * conversion start time, and marks the barometer as waiting for a result.
+ *
+ * @param cmd MS5611 conversion command byte (e.g., D1 for pressure or D2 for temperature).
+ */
 void ms5611_start_conversion(uint8_t cmd) {
   digitalWrite(CS_PIN, LOW);
   SPI.transfer(cmd);
@@ -277,6 +294,13 @@ void ms5611_start_conversion(uint8_t cmd) {
   baro_waiting = true;
 }
 
+/**
+ * @brief Reads the 24-bit ADC conversion result from the MS5611 barometer over SPI.
+ *
+ * Initiates an ADC read command to the MS5611, retrieves three bytes, and combines them into a 24-bit unsigned value.
+ *
+ * @return uint32_t 24-bit ADC result (MSB in the high byte of the returned value).
+ */
 uint32_t ms5611_read_adc() {
   digitalWrite(CS_PIN, LOW);
   SPI.transfer(CMD_ADC_READ);
@@ -287,7 +311,13 @@ uint32_t ms5611_read_adc() {
   return (uint32_t(b1) << 16) | (uint32_t(b2) << 8) | b3;
 }
 
-// -------------------- MS5611 higher-level --------------------
+/**
+ * @brief Initialize the MS5611 barometer and start the first temperature conversion.
+ *
+ * Configures the SPI interface and chip-select pin for the MS5611, issues a sensor
+ * reset, reads the sensor calibration PROM, initializes the internal barometer
+ * state variables, and begins a D2 (temperature) conversion cycle.
+ */
 void ms5611_begin() {
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
@@ -304,6 +334,17 @@ void ms5611_begin() {
   ms5611_start_conversion(CMD_CONV_D2);
 }
 
+/**
+ * @brief Compute compensated temperature and pressure from MS5611 raw ADC readings.
+ *
+ * Uses stored PROM calibration coefficients and second-order temperature compensation,
+ * then applies the configured temperature offset before returning results.
+ *
+ * @param[out] temperature_c Compensated temperature in degrees Celsius (includes ms5611_temp_offset_c).
+ * @param[out] pressure_mbar Compensated pressure in millibar.
+ * @param D1 Raw 24-bit pressure ADC reading from the MS5611.
+ * @param D2 Raw 24-bit temperature ADC reading from the MS5611.
+ */
 void ms5611_compute(float &temperature_c, float &pressure_mbar, uint32_t D1, uint32_t D2) {
   const float c1 = float(C[1]);
   const float c2 = float(C[2]);
@@ -339,6 +380,16 @@ void ms5611_compute(float &temperature_c, float &pressure_mbar, uint32_t D1, uin
   pressure_mbar = P * 0.01f;
 }
 
+/**
+ * @brief Advance the MS5611 non-blocking conversion state machine and update barometer-derived values.
+ *
+ * Checks whether a pending conversion has completed; if so, reads the ADC result, computes temperature
+ * and pressure when both temperature (D2) and pressure (D1) samples are available, and updates the
+ * module's public state (ms5611_temp_c, ms5611_pressure_mbar). If no altitude reference is set and
+ * valid measurements are available, sets the altitude reference. When a reference exists and pressure
+ * is valid, computes AGL and ASL altitude and applies the altitude filter. The function also advances
+ * the internal barometer state index and starts the next D1/D2 conversion as required.
+ */
 void ms5611_task_update() {
   if (!baro_waiting) return;
   if (millis() - baro_conv_start_ms < CONV_TIME_MS) return;
@@ -389,7 +440,16 @@ void ms5611_task_update() {
   }
 }
 
-// -------------------- Altitude math --------------------
+/**
+ * @brief Set the barometric reference values used to compute altitude above sea level.
+ *
+ * Stores the reference pressure (mbar), reference temperature (converted from °C to K),
+ * and the reference altitude ASL (meters), and marks the altitude reference as initialized.
+ *
+ * @param pressure_mbar Reference absolute pressure in millibars.
+ * @param temp_c Reference temperature in degrees Celsius; converted to Kelvin internally.
+ * @param altitude_asl_m_in Reference altitude above sea level in meters.
+ */
 void calibrateAltitudeReference(float pressure_mbar, float temp_c, float altitude_asl_m_in) {
   p0_ref_mbar = pressure_mbar;
   t0_ref_k    = temp_c + 273.15f;
@@ -397,6 +457,12 @@ void calibrateAltitudeReference(float pressure_mbar, float temp_c, float altitud
   refSet = true;
 }
 
+/**
+ * @brief Compute height difference (meters) from the stored pressure/temperature reference using the barometric formula.
+ *
+ * @param pressure_mbar Current absolute pressure in millibars.
+ * @return float Height difference in meters relative to the stored reference altitude (positive when current pressure is lower than the reference). Returns 0.0 if the reference is not set, the input is not finite, or pressure_mbar is non‑positive.
+ */
 float calcDeltaH_m(float pressure_mbar) {
   if (!refSet || !isfinite(pressure_mbar) || pressure_mbar <= 0) return 0.0f;
   const float EXP = 0.190263f;
@@ -405,6 +471,14 @@ float calcDeltaH_m(float pressure_mbar) {
   return dh;
 }
 
+/**
+ * @brief Smooths altitude readings using a single-pole low-pass filter.
+ *
+ * The first call initializes the filter state to the provided sample.
+ *
+ * @param a Current altitude measurement in meters.
+ * @return float Filtered altitude in meters.
+ */
 float filterAltitude(float a) {
   static bool first = true;
   if (first) { first = false; altitude_filtered = a; }
@@ -412,25 +486,59 @@ float filterAltitude(float a) {
   return altitude_filtered;
 }
 
-// -------------------- MPU Raw + DMP --------------------
+/**
+ * @brief Read raw accelerometer, gyroscope, and temperature data from the MPU6050 and update internal state.
+ *
+ * Reads raw sensor registers into the module's accel (`ax_raw`, `ay_raw`, `az_raw`) and gyro
+ * (`gx_raw`, `gy_raw`, `gz_raw`) variables, stores the raw temperature value in `temp_raw`,
+ * and updates `temp_mpu` with the sensor temperature in degrees Celsius.
+ */
 void read_mpu_raw() {
   mpu.getMotion6(&ax_raw, &ay_raw, &az_raw, &gx_raw, &gy_raw, &gz_raw);
   temp_raw = mpu.getTemperature();
   temp_mpu = temp_raw / 340.0f + 36.53f;
 }
 
+/**
+ * @brief Converts raw accelerometer readings to units of gravity (g).
+ *
+ * Converts the internally-read raw accelerometer counts into floating-point
+ * values expressed in g (multiples of standard gravity) using the configured
+ * accelerometer scale factor.
+ *
+ * @param[out] ax_g X-axis acceleration in g.
+ * @param[out] ay_g Y-axis acceleration in g.
+ * @param[out] az_g Z-axis acceleration in g.
+ */
 void convert_accel_to_g(float &ax_g, float &ay_g, float &az_g) {
   ax_g = (float)ax_raw / ACCEL_SCALE;
   ay_g = (float)ay_raw / ACCEL_SCALE;
   az_g = (float)az_raw / ACCEL_SCALE;
 }
 
+/**
+ * @brief Convert raw gyro samples to angular rates in degrees per second.
+ *
+ * Converts the last-read raw gyroscope values into degrees per second using
+ * the configured GYRO_SCALE and stores the results in the provided references.
+ *
+ * @param gx_degs Reference to receive the X-axis angular rate in degrees/second.
+ * @param gy_degs Reference to receive the Y-axis angular rate in degrees/second.
+ * @param gz_degs Reference to receive the Z-axis angular rate in degrees/second.
+ */
 void convert_gyro_to_degs(float &gx_degs, float &gy_degs, float &gz_degs) {
   gx_degs = (float)gx_raw / GYRO_SCALE;
   gy_degs = (float)gy_raw / GYRO_SCALE;
   gz_degs = (float)gz_raw / GYRO_SCALE;
 }
 
+/**
+ * @brief Processes available MPU6050 DMP FIFO packets to update orientation and raw sensor readings.
+ *
+ * If the DMP is not ready this function does nothing. On FIFO overflow it resets the FIFO and aborts.
+ * Otherwise it consumes each complete DMP packet, updates the global quaternion, gravity vector, and
+ * yaw/pitch/roll values, and calls read_mpu_raw() to refresh raw accelerometer/gyroscope/temperature samples.
+ */
 void read_dmp() {
   if (!dmpReady) return;
 
@@ -454,19 +562,41 @@ void read_dmp() {
   }
 }
 
+/**
+ * @brief Sets the current yaw, pitch, and roll as the reference zero offsets.
+ *
+ * Stores the current YPR values, converted to degrees, into the global ypr_offset
+ * array so subsequent adjusted YPR readings are reported relative to this reference.
+ */
 void zeroYPR() {
   ypr_offset[0] = ypr[0] * 180.0f / M_PI;
   ypr_offset[1] = ypr[1] * 180.0f / M_PI;
   ypr_offset[2] = ypr[2] * 180.0f / M_PI;
 }
 
+/**
+ * @brief Produce yaw, pitch, and roll adjusted by the stored zero offsets.
+ *
+ * Converts the internally-stored YPR values from radians to degrees and subtracts
+ * the corresponding saved offsets to produce adjusted angles suitable for display
+ * or logging.
+ *
+ * @param yaw_adj Output yaw angle in degrees (0..360 convention depends on sensor).
+ * @param pitch_adj Output pitch angle in degrees.
+ * @param roll_adj Output roll angle in degrees.
+ */
 void get_adjusted_ypr(float &yaw_adj, float &pitch_adj, float &roll_adj) {
   yaw_adj   = (ypr[0] * 180.0f / M_PI) - ypr_offset[0];
   pitch_adj = (ypr[1] * 180.0f / M_PI) - ypr_offset[1];
   roll_adj  = (ypr[2] * 180.0f / M_PI) - ypr_offset[2];
 }
 
-// -------------------- Logging / state --------------------
+/**
+ * @brief Map a FlightState value to its human-readable name.
+ *
+ * @param st Flight state enum value to describe.
+ * @return const char* String literal: "GROUND", "FLIGHT", "LANDED", "DONE", or "UNKNOWN" for unrecognized values.
+ */
 const char* flightStateName(FlightState st) {
   switch (st) {
     case ST_GROUND: return "GROUND";
@@ -477,17 +607,43 @@ const char* flightStateName(FlightState st) {
   }
 }
 
+/**
+ * @brief Pushes a telemetry sample into the circular pre-launch cache.
+ *
+ * Stores the provided Sample at the current cache head, advances the head index,
+ * and marks the cache as filled when the buffer wraps (older entries will be
+ * overwritten once full).
+ *
+ * @param s Sample to append to the cache (copied into the buffer).
+ */
 void cachePush(const Sample &s) {
   cacheBuf[cacheHead] = s;
   cacheHead = (cacheHead + 1) % CACHE_SAMPLES;
   if (cacheHead == 0) cacheFilled = true;
 }
 
+/**
+ * @brief Write the CSV header line to the currently open log file.
+ *
+ * If no log file is open, this function does nothing. When a file is open it
+ * writes the column header: t_ms,h_m,alt_asl_m,vel_mps,p_mbar,t_ms5611_c,
+ * t_mpu_c,ax_g,ay_g,az_g,pitch_deg,roll_deg,event
+ */
 void writeCsvHeader() {
   if (!logFile) return;
   logFile.println("t_ms,h_m,alt_asl_m,vel_mps,p_mbar,t_ms5611_c,t_mpu_c,ax_g,ay_g,az_g,pitch_deg,roll_deg,event");
 }
 
+/**
+ * @brief Writes a Sample as a CSV row to the currently open log file.
+ *
+ * If no log file is open this function does nothing. The row contains
+ * timestamp, height, altitude ASL, vertical speed, pressure, temperatures,
+ * accelerations, pitch and roll, and an optional event tag.
+ *
+ * @param s Sample data to serialize into the CSV row.
+ * @param eventTag Optional null-terminated event tag appended as the last CSV field; pass nullptr or an empty string for no tag.
+ */
 void writeCsvRow(const Sample &s, const char* eventTag) {
   if (!logFile) return;
 
@@ -505,6 +661,12 @@ void writeCsvRow(const Sample &s, const char* eventTag) {
   if (n > 0) logFile.println(line);
 }
 
+/**
+ * @brief Appends any stored pre-launch samples from the in-memory circular cache into the currently open CSV log.
+ *
+ * If a log file is open, writes every cached Sample to the file in chronological order and tags each row with "CACHE".
+ * If no log is open, the function is a no-op.
+ */
 void dumpCacheToFile() {
   if (!logFile) return;
 
@@ -517,6 +679,14 @@ void dumpCacheToFile() {
   }
 }
 
+/**
+ * @brief Ensures a new flight CSV log file is opened and initialized (if not already open).
+ *
+ * Creates and opens a uniquely-named CSV file on FFat, writes the CSV header, dumps any
+ * pre-launch cache into the file, and marks the log as open; no-op if a log is already open.
+ *
+ * @return true if a log file was already open or was successfully created and initialized, false on failure.
+ */
 bool openNewLogFile() {
   if (logOpen) return true;
 
@@ -540,6 +710,12 @@ bool openNewLogFile() {
   return true;
 }
 
+/**
+ * @brief Flushes and closes the current CSV log file if one is open.
+ *
+ * If a log is open, this function flushes buffered data to storage, closes the file,
+ * and clears the internal open flag. If no log is open, the function returns without action.
+ */
 void closeLogFileSafe() {
   if (!logOpen) return;
   logFile.flush();
@@ -547,6 +723,17 @@ void closeLogFileSafe() {
   logOpen = false;
 }
 
+/**
+ * @brief Estimate vertical speed from recent altitude samples.
+ *
+ * Maintains an internal sliding window of recent altitude/time samples and
+ * returns a smoothed vertical velocity in meters per second. Until the window
+ * is filled the function returns 0.0.
+ *
+ * @param hnow Current altitude in meters.
+ * @param nowms Current timestamp in milliseconds.
+ * @return float Smoothed vertical speed in meters per second.
+ */
 float computeVerticalSpeed(float hnow, uint32_t nowms) {
   // Push into ring buffer
   hWin[velIdx] = hnow;
@@ -594,6 +781,16 @@ float computeVerticalSpeed(float hnow, uint32_t nowms) {
   return velfilt;
 }
 
+/**
+ * @brief Construct a telemetry Sample populated with the latest sensor and timing values.
+ *
+ * Populates a Sample with the current timestamp, altitude (AGL and ASL), pressure and temperatures,
+ * accelerometer axes in g, pitch and roll in degrees, and the supplied vertical velocity.
+ *
+ * @param vel_mps_now Vertical speed in meters per second to store in the sample.
+ * @return Sample A Sample whose fields contain the most-recent sensor readings; fields with no valid
+ * data are set to zero. The timestamp is millisecond uptime. Pitch and roll are expressed in degrees.
+ */
 Sample makeSample(float vel_mps_now) {
   Sample s{};
   s.t_ms = millis();
@@ -616,6 +813,18 @@ Sample makeSample(float vel_mps_now) {
   return s;
 }
 
+/**
+ * @brief Update flight state machine and manage CSV logging based on a new telemetry sample.
+ *
+ * Processes a single Sample to:
+ * - maintain the pre-launch circular cache until launch,
+ * - detect launch, apogee, and landing events and transition flightState (ST_GROUND → ST_FLIGHT → ST_LANDED → ST_DONE),
+ * - open/dump/close CSV logs and write event-tagged rows ("EVENT_LAUNCH", "EVENT_APOGEE", "EVENT_LAND", "POST_LAND", "EVENT_CLOSE"),
+ * - periodically flush the open log to reduce data loss,
+ * - enable or disable the SoftAP/web server according to flight state and configuration.
+ *
+ * @param s Current telemetry sample containing timestamp, altitude, vertical speed, and other sensor fields used for detection and logging.
+ */
 void updateFlightStateAndLogging(const Sample &s) {
   // Always keep a cache until launch
   if (!launchDetected) cachePush(s);
@@ -730,7 +939,14 @@ static const IPAddress AP_IP(192, 168, 4, 1);
 static const IPAddress AP_GW(192, 168, 4, 1);
 static const IPAddress AP_SUBNET(255, 255, 255, 0);
 
-// Helper: start SoftAP with some explicit params (channel/max conn from Arduino-ESP32 WiFi API) [web:160]
+/**
+ * @brief Start a WiFi SoftAP using configured SSID/password and optional static IP.
+ *
+ * Attempts to configure a static IP for the AP, sets WiFi mode to AP, and starts a SoftAP
+ * on channel 1 with up to 4 clients. If no password is configured the AP is created open.
+ *
+ * @return true if the SoftAP was started successfully, false otherwise.
+ */
 static bool startSoftAP() {
   WiFi.mode(WIFI_AP);
   delay(50);
@@ -751,6 +967,12 @@ static bool startSoftAP() {
   return ok;
 }
 
+/**
+ * @brief Stop the HTTP server and disable the device SoftAP and WiFi radio.
+ *
+ * Stops the running HTTP server, disconnects and stops the SoftAP (optionally powering off
+ * the WiFi radio), and clears the apMode flag to indicate AP is no longer active.
+ */
 void stopAPAndServer() {
   // Stop HTTP server first
   server.stop();
@@ -765,6 +987,24 @@ void stopAPAndServer() {
   apMode = false;
 }
 
+/**
+ * @brief Start the SoftAP and HTTP server and register REST endpoints for telemetry and log management.
+ *
+ * Starts (or restarts) the SoftAP; if the AP cannot be started, the server is not started. When successful,
+ * registers routes for:
+ * - "/" : serves the main dashboard page.
+ * - "/data" : returns live telemetry JSON.
+ * - "/setAltitude" (POST) : set ASL altitude reference.
+ * - "/zeroYPR" (POST) : zero current yaw/pitch/roll.
+ * - "/reset" (POST) : request device reset.
+ * - "/deleteLogs" (POST) : delete all CSV logs.
+ * - "/status" : returns a compact JSON status (flight state, event flags, log status/file).
+ * - "/logs" : HTML listing of files with links and a delete-all form.
+ * - "/download?file=/<path>" : streams the named CSV file as an attachment.
+ * - "/latest" : streams the most recent finished flight CSV (prefers closed current log, otherwise picks the largest flight_*.csv).
+ *
+ * Also sets the server content length to unknown and begins listening for HTTP clients.
+ */
 void startAPAndServer() {
   // (Re)start AP
   apMode = startSoftAP();
@@ -906,7 +1146,15 @@ void startAPAndServer() {
   server.begin();
 }
 
-// -------------------- LED --------------------
+/**
+ * @brief Update the status LED to reflect flight and AP state.
+ *
+ * Sets the LED solid on during flight. After a completed flight it blinks slowly.
+ * When not in flight or done, the LED is off if the SoftAP is disabled; if the SoftAP
+ * is enabled the LED blinks: slow when one or more clients are connected, fast when none.
+ * Blinking is timed non-blockingly using the lastBlinkTime timestamp and the
+ * BLINK_FAST / BLINK_SLOW intervals.
+ */
 void updateLED() {
   unsigned long now = millis();
 
@@ -945,7 +1193,18 @@ static const char* ALTITUDE_INPUT_DEFAULT = "95.0";
 // New handler forward-declare (add to your forward declarations too)
 void handleDeleteLogs();
 
-// UI
+/**
+ * @brief Build the device web dashboard HTML page.
+ *
+ * Returns a complete HTML document (with embedded CSS and JavaScript) used as the web UI
+ * for live telemetry and log management. The page polls the /data endpoint, displays
+ * sensor values (barometer, MPU6050, orientation, vertical speed), shows flight/log state,
+ * and provides controls for setting ASL altitude, zeroing YPR, deleting logs, and resetting
+ * the device. The generated HTML embeds the configured AP SSID and the default altitude
+ * input value.
+ *
+ * @return String Full HTML page to be served by the device's HTTP server.
+ */
 String htmlPage() {
   // NOTE: SSID line uses string concatenation (raw string -> String(ap_ssid) -> raw string)
   String s = R"=====(<!doctype html>
@@ -1172,10 +1431,27 @@ String htmlPage() {
   return s;
 }
 
+/**
+ * @brief Serve the main web dashboard page for the root ("/") HTTP endpoint.
+ *
+ * Sends the HTML dashboard produced by htmlPage() with a 200 OK status and "text/html" content type.
+ */
 void handleRoot() {
   server.send(200, "text/html", htmlPage());
 }
 
+/**
+ * @brief Handle HTTP POST to set the altitude above sea level (ASL) reference.
+ *
+ * Reads the "altitude" request argument (meters) and, using the current MS5611
+ * pressure and temperature readings, sets the stored ASL reference via
+ * calibrateAltitudeReference().
+ *
+ * If the "altitude" argument is missing, responds 400 Bad Request. If the
+ * MS5611 has no valid pressure/temperature reading available, responds 503
+ * Service Unavailable. On success, responds 200 OK with a confirmation message
+ * that includes the set altitude (meters, two decimals).
+ */
 void handleSetAltitude() {
   if (!server.hasArg("altitude")) {
     server.send(400, "text/plain", "Missing altitude parameter");
@@ -1195,17 +1471,40 @@ void handleSetAltitude() {
   server.send(200, "text/plain", "ASL reference set to " + String(altitude_asl, 2) + " m");
 }
 
+/**
+ * @brief Set the current yaw/pitch/roll as the zero reference and acknowledge the action to the HTTP client.
+ *
+ * Updates the device's YPR zero reference so subsequent orientation readings are reported relative to the current attitude.
+ * Sends an HTTP 200 response with Content-Type "text/plain" and body "YPR zeroed".
+ */
 void handleZeroYPR() {
   zeroYPR();
   server.send(200, "text/plain", "YPR zeroed");
 }
+/**
+ * @brief Handle an HTTP request to reboot the device.
+ *
+ * Sends a 200/plain-text response with the body "Rebooting..." and then
+ * restarts the ESP after a short delay.
+ */
 void handleReset() {
   server.send(200, "text/plain", "Rebooting...");
   delay(150);
   ESP.restart();
 }
 
-// NEW: delete all CSV logs in FFat root
+/**
+ * @brief Deletes all CSV log files from the FFat root and reports the result over HTTP.
+ *
+ * Iterates the FFat root directory, collects filenames that end with ".csv" (case-insensitive),
+ * attempts to remove each collected CSV file, and sends an HTTP response describing how many
+ * files were deleted, failed, or skipped due to an internal limit.
+ *
+ * @note If a log file is currently open for writing, the request is refused and an HTTP 409 is sent.
+ * @note If the FFat root cannot be opened, an HTTP 500 is sent.
+ * @note A fixed upper bound is used when collecting CSV paths; files beyond that bound are counted
+ * as skipped and reported in the final response.
+ */
 void handleDeleteLogs() {
   // Safety: don't delete while actively logging
   if (logOpen) {
@@ -1260,6 +1559,17 @@ void handleDeleteLogs() {
   server.send(200, "text/plain", msg);
 }
 
+/**
+ * @brief Send a JSON snapshot of current telemetry and system status to the HTTP client.
+ *
+ * Packages current IMU and barometer values, computed velocity and altitude, orientation,
+ * flight/logging state, and connected client count into a JSON object and responds with
+ * HTTP 200/ application/json.
+ *
+ * The JSON includes the following keys: `temp_ms5611`, `temp_mpu`, `pressure`, `altitude`,
+ * `altitude_type`, `vel_mps`, `ax_g`, `ay_g`, `az_g`, `gx_degs`, `gy_degs`, `gz_degs`,
+ * `yaw`, `pitch`, `roll`, `state`, `log_file`, `log_open`, and `clients`.
+ */
 void handleData() {
   read_dmp();
   read_mpu_raw();
@@ -1311,7 +1621,15 @@ void handleData() {
   server.send(200, "application/json", json);
 }
 
-// -------------------- SETUP --------------------
+/**
+ * @brief Initialize hardware, sensors, filesystem, networking, and logging state.
+ *
+ * Performs board-wide startup: configures LED and serial, mounts the FFat filesystem
+ * (formatting only if mounting fails), initializes the MS5611 barometer and acquires
+ * a short set of initial samples to set an altitude reference if possible, configures
+ * I2C and initializes the MPU6050 with DMP and calibrated offsets, and starts the
+ * soft AP + HTTP server when configured. Also initializes the logging cadence timer.
+ */
 void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, LOW);
@@ -1410,7 +1728,14 @@ void setup() {
   nextLogMs = millis();
 }
 
-// -------------------- LOOP --------------------
+/**
+ * @brief Main runtime loop: advance sensors, perform periodic logging, serve web requests, and update LED.
+ *
+ * Repeatedly drives non-blocking sensor work (MS5611 state machine and MPU/DMP reads), enforces the logging cadence
+ * (creates a Sample at each LOG_INTERVAL_MS, computes vertical speed, and delegates flight-state transitions and CSV
+ * logging), services the HTTP server when SoftAP is active, and updates the status LED. Includes a short delay to
+ * yield the scheduler.
+ */
 void loop() {
   // Keep MS5611 conversions running
   ms5611_task_update();
