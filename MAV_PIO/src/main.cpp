@@ -189,7 +189,7 @@ uint32_t landedAtMs = 0;
 
 // Velocity estimation (windowed average altitude -> velocity)
 // Computes v = (avg(h) - avg(prev h)) / dt across a window to suppress baro noise.
-static constexpr uint8_t VELWIN = 25;   // window length in samples (LOGHZ=50 => 10 samples = 0.20 s)
+static constexpr uint8_t VELWIN = 25;   // window length in samples (LOG_HZ=50 => 25 samples = 0.50 s)
 
 float hWin[VELWIN] = {0};
 uint32_t tWin[VELWIN] = {0};
