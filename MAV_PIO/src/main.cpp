@@ -281,7 +281,7 @@ void writeCsvRow(const Sample &s, const char* eventTag) {
 
   char line[240];
   int n = snprintf(line, sizeof(line),
-    "%lu,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.3f,%.3f,%.3f,%.2f,%.2f,%s",
+    "%lu,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%s",
     (unsigned long)s.t_ms,
     s.h_m, s.alt_asl_m, s.vel_mps,
     s.p_mbar,
