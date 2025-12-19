@@ -520,7 +520,8 @@ void dumpCacheToFile() {
 bool openNewLogFile() {
   if (logOpen) return true;
 
-  // Unique-ish without RTC
+  currentLogPath[0] = 0;
+
   uint32_t r = esp_random();
   uint32_t m = millis();
   snprintf(currentLogPath, sizeof(currentLogPath), "/flight_%08lX_%08lX.csv",
@@ -880,8 +881,11 @@ void startAPAndServer() {
           bestSize = sz;
           bestName = name;
         }
+        f.close();
         f = root.openNextFile();
       }
+
+      root.close();
     }
 
     if (bestName.length() == 0) {
@@ -1067,7 +1071,7 @@ String htmlPage() {
 
     function doReset() {
     if (!confirm("Reset the device now?")) return;
-    fetch("reset", { method: "POST" });
+    fetch("/reset", { method: "POST" });
     }
 
     function updateLoop() {
