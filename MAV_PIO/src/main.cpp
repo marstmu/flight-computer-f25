@@ -101,13 +101,13 @@ static constexpr float LAUNCH_VEL_THRESH_MPS = 8.0f;
 static constexpr uint16_t LAUNCH_CONFIRM_SAMPLES = 5;
 
 static constexpr float APOGEE_VEL_NEG_THRESH_MPS = -1.5f;
-static constexpr float APOGEE_DROP_THRESH_M = 2.0f;
+static constexpr float APOGEE_DROP_THRESH_M = 1.5f;
 static constexpr uint16_t APOGEE_CONFIRM_SAMPLES = 8;
 
 static constexpr float LAND_VEL_ABS_THRESH_MPS = 2.0f;
 static constexpr float LAND_ALT_RANGE_M = 2.0f;
-static constexpr uint32_t LAND_STABLE_MS = 2000;
-static constexpr uint32_t LAND_AFTER_APOGEE_DELAY_MS = 10000; // 5–10s (pick 5000..10000)
+static constexpr uint32_t LAND_STABLE_MS = 2500;
+static constexpr uint32_t LAND_AFTER_APOGEE_DELAY_MS = 8000; // 5–10s (pick 5000..10000)
 
 static constexpr uint32_t POST_LAND_LOG_MS = 3000;
 
