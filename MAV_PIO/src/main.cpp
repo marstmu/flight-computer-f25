@@ -104,9 +104,9 @@ static constexpr float APOGEE_VEL_NEG_THRESH_MPS = -1.5f;
 static constexpr float APOGEE_DROP_THRESH_M = 2.0f;
 static constexpr uint16_t APOGEE_CONFIRM_SAMPLES = 8;
 
-static constexpr float LAND_VEL_ABS_THRESH_MPS = 1.5f;
+static constexpr float LAND_VEL_ABS_THRESH_MPS = 2.0f;
 static constexpr float LAND_ALT_RANGE_M = 2.0f;
-static constexpr uint32_t LAND_STABLE_MS = 500;
+static constexpr uint32_t LAND_STABLE_MS = 2000;
 static constexpr uint32_t LAND_AFTER_APOGEE_DELAY_MS = 10000; // 5–10s (pick 5000..10000)
 
 static constexpr uint32_t POST_LAND_LOG_MS = 3000;
@@ -120,7 +120,7 @@ struct Sample {
   float t_ms5611_c;
   float t_mpu_c;
   float ax_g, ay_g, az_g;
-  float pitch_deg, roll_deg;
+  float pitch_deg, roll_deg, yaw_deg;
 };
 
 Sample cacheBuf[CACHE_SAMPLES];
@@ -149,7 +149,7 @@ uint32_t landedAtMs = 0;
 
 // Velocity estimation (windowed average altitude -> velocity)
 // Computes v = (avg(h) - avg(prev h)) / dt across a window to suppress baro noise.
-static constexpr uint8_t VELWIN = 25;   // window length in samples (LOG_HZ=50 => 25 samples = 0.50 s)
+static constexpr uint8_t VELWIN = 50;   // window length in samples (LOG_HZ=50 => 25 samples = 0.50 s)
 
 float hWin[VELWIN] = {0};
 uint32_t tWin[VELWIN] = {0};
@@ -273,7 +273,7 @@ void cachePush(const Sample &s) {
 
 void writeCsvHeader() {
   if (!logFile) return;
-  logFile.println("t_ms,h_m,alt_asl_m,vel_mps,p_mbar,t_ms5611_c,t_mpu_c,ax_g,ay_g,az_g,pitch_deg,roll_deg,event");
+  logFile.println("t_ms,h_m,alt_asl_m,vel_mps,p_mbar,t_ms5611_c,t_mpu_c,ax_g,ay_g,az_g,pitch_deg,roll_deg,yaw_deg,event");
 }
 
 void writeCsvRow(const Sample &s, const char* eventTag) {
@@ -281,13 +281,13 @@ void writeCsvRow(const Sample &s, const char* eventTag) {
 
   char line[240];
   int n = snprintf(line, sizeof(line),
-    "%lu,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.3f,%.3f,%.3f,%.2f,%.2f,%s",
+    "%lu,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%.3f,%.3f,%.3f,%.2f,%.2f,%.2f,%s",
     (unsigned long)s.t_ms,
     s.h_m, s.alt_asl_m, s.vel_mps,
     s.p_mbar,
     s.t_ms5611_c, s.t_mpu_c,
     s.ax_g, s.ay_g, s.az_g,
-    s.pitch_deg, s.roll_deg,
+    s.pitch_deg, s.roll_deg, s.yaw_deg,
     (eventTag ? eventTag : "")
   );
   if (n > 0) logFile.println(line);
@@ -401,6 +401,7 @@ Sample makeSample(float vel_mps_now) {
 
   s.pitch_deg = ypr[1] * 180.0f / M_PI;
   s.roll_deg  = ypr[2] * 180.0f / M_PI;
+  s.yaw_deg = ypr[0] * 180.0f / M_PI;
 
   return s;
 }
